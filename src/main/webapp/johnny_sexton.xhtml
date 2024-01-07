@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Johnny Sexton</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/styles.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</h:head>
+<h:body class="container">
+	<header>
+		<nav class="navbar">
+			<div class="navbar-start">
+				<h:outputLink value="home.xhtml"
+					styleClass="navbar-logo navbar-link">
+					<span style="font-size: 20px;">Cook<span
+						style="color: #395C39;">Champion</span></span>
+				</h:outputLink>
+			</div>
+			<div class="navbar-end">
+				<h:form>
+					<h:outputLink value="booking.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserCustomer()}">
+						Student Booking
+		            </h:outputLink>
+					<h:outputLink value="studentlist.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student List
+		            </h:outputLink>
+					<h:outputLink value="attendance.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student Attendance
+		            </h:outputLink>
+					<h:outputLink value="recipeupload.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Recipe Upload
+		            </h:outputLink>
+				</h:form>
+				<h:form rendered="#{not loginController.loggedIn}">
+					<h:outputLink value="register.xhtml" styleClass="navbar-link">
+						Registration
+	            	</h:outputLink>
+					<h:outputLink value="login.xhtml" styleClass="navbar-link">
+		                Login
+		            </h:outputLink>
+				</h:form>
+				<h:form>
+					<h:commandButton value="Logout" action="#{loginController.logout}"
+						styleClass="navbar-button" rendered="#{loginController.loggedIn}" />
+				</h:form>
+			</div>
+		</nav>
+		<div class="header-image-container">
+			<img src="resources/images/JohnnySexton.jpg"
+				alt="Cooking Camp Image" class="camp-image" height="300px" />
+		</div>
+	</header>
+	<main>
+		<div class="surprise-guest">
+		  <h4>This week’s surprise guest:</h4>
+		  <span class="guest-name">Johnny Sexton!</span>
+		</div>
+		<p>Johnny Sexton is a sensational rugby player, renowned for his
+			extraordinary skills and leadership on the field. He’s a key player
+			for both the Irish national team and Leinster, showcasing his
+			exceptional talents in every match. He will be sharing his secret
+			healthy recipe with us tomorrow, and we can’t wait!</p>
+		<p>
+			Here you can read more about <a style="padding: 0; background-color: transparent; color: darkblue"
+				href="https://en.wikipedia.org/wiki/Johnny_Sexton">Johnny Sexton</a>
+		</p>
+		<h:outputLink value="camp12_14.xhtml"
+				styleClass="button"
+				style="font-size: 16px; margin-left: 0px;">
+		                Back to Camp Info
+		</h:outputLink>
+	</main>
+	<footer>
+		<div class="footer-content">&#169; 2023 Cook Like A Champion.
+			All rights reserved.</div>
+	</footer>
+</h:body>
+</html>

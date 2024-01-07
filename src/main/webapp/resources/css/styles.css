@@ -1,0 +1,454 @@
+/* Reset default margin and padding for consistency */
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+	margin: 0;
+	padding: 2px;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.8;
+	background-color: #F3FEEC;
+	/* Light Cream */
+	padding: 15px;
+	display: flex;
+	min-height: 100vh;
+}
+
+header {
+	display: block;
+	width: 100%;
+}
+
+/* Styling for login and register buttons */
+.button-container {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.button {
+	display: inline-block;
+	padding: 7px 15px;
+	font-size: 16px;
+	text-decoration: none;
+	color: #D1FFD3;
+	background-color: #7BBA71;
+	/* Green */
+	border-radius: 5px;
+	margin: 5px;
+	
+	cursor: pointer;
+}
+
+/* Add spacing between login and register buttons */
+.button:first-child {
+	margin-right: 10px;
+}
+
+
+main {
+	flex: 1;
+	width: 100%;
+	margin: 5px 0;
+	align-items: center;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.header-image-container {
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.footer-image-container {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.camp-image {
+	max-width: 100%;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px #000000;
+	margin: 0 auto;
+}
+
+.CampText {
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: left;
+}
+
+.CampText article {
+	margin: 10px auto;
+	max-width: 95%;
+}
+
+article h5 {
+	margin-bottom: 5px;
+}
+
+article p {
+	margin-bottom: 10px;
+}
+
+aside {
+	text-align: center;
+	margin: 20px 0;
+}
+
+h1 {
+	font-size: 28px;
+	color: #395C39;
+	/* dark green */
+	margin-bottom: 2px;
+}
+
+h2 {
+	font-size: 24px;
+	color: #88E085;
+	/* Light green */
+	margin-bottom: 2px;
+}
+
+h3 {
+	font-size: 22px;
+	color: #395C39;
+	/* Dark Green */
+	margin-bottom: 2px;
+}
+
+h4 {
+	font-size: 20px;
+	color: #5B8955;
+	/* Salmon */
+	margin-bottom: 2px;
+}
+
+h5 {
+	font-size: 18px;
+	color: #6B9A6F;
+	/* Salmon */
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+
+p {
+	color: #294424;
+	margin-bottom: 10px;
+	text-align: left;
+}
+
+ul {
+	list-style: disc;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+li {
+	color: #4C6D43;
+}
+
+a {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 16px;
+	text-decoration: none;
+	color: #fff;
+	background-color: #A8E381;
+	/* Coral Pink */
+	border-radius: 5px;
+}
+
+a:hover {
+	background-color: rgb(143, 192, 132);
+	/* Darker Coral Pink */
+}
+
+@media (max-width: 600px) {
+	h1 {
+		font-size: 28px;
+	}
+
+	h2 {
+		font-size: 20px;
+	}
+
+	p {
+		font-size: 14px;
+	}
+
+	ul {
+		font-size: 14px;
+	}
+
+	a {
+		font-size: 14px;
+	}
+
+	.navbar-logo {
+		font-size: 14px;
+		/* Adjust the font size for smaller screens */
+	}
+	
+	.navbar-button {
+		font-size: 14px;
+		/* Adjust the font size for smaller screens */
+	}
+	
+	.navbar-link {
+		font-size: 14px;
+		/* Adjust the font size for smaller screens */
+	}
+}
+
+/* Adjust container width and margins for larger screens */
+@media (min-width: 750px) {
+	body {
+		display: flex;
+	}
+
+	.container {
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+/* Style the Recipe list Table */
+.RecipeTable {
+	border-collapse: collapse;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.RecipeTableHeader {
+	text-align: center;
+	background: #AAC9A7;
+	border: 1px solid #092F0F;
+	padding: 2px;
+	padding-right: 5px;
+}
+
+.RecipeTableOddRow {
+	text-align: left;
+	background: #E3EDD0;
+	padding: 5px auto;
+}
+
+.RecipeTableEvenRow {
+	text-align: left;
+	background: #E1F1C0;
+	padding: 5px auto;
+}
+
+
+/* Style the Student list Table */
+.StudentTable {
+	border-collapse: collapse;
+	border: 1px solid #000000;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.StudentTableHeader {
+	text-align: center;
+	background: #AAC9A7;
+	border-bottom: 2px solid #092F0F;
+	padding: 2px;
+	font-weight: bold;
+}
+
+.StudentTableOddRow {
+	text-align: left;
+	background: #E7FAD6;
+	/* Light Cream */
+}
+
+.StudentTableEvenRow {
+	text-align: left;
+	background: #CCF7D0;
+}
+
+.tab-content {
+	margin-top: 20px;
+}
+
+
+.banner {
+	background-color: #A4E09B;
+	/* green */
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.banner-image {
+	max-width: 100%;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px #000000;
+}
+
+.inline-image {
+	max-width: 100%;
+	border-radius: 10px;
+	box-shadow: 0 2px 5px #000000;
+}
+
+.banner-content {
+	max-width: 900px;
+	background-color: #f9f9f9;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px #000000;
+}
+
+/* Navbar styles */
+.navbar {
+	background-color: #4CAF50;
+	/* Dark Green */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 20px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
+	border-radius: 10px;
+}
+
+.navbar-start {
+	display: flex;
+	align-items: center;
+}
+
+.navbar-logo {
+	font-weight: bold;
+	background-color: #4CAF50;
+	/* Dark Green */
+	text-decoration: none;
+	color: #fff;
+	margin-right: 20px;
+}
+
+.navbar-end {
+	display: flex;
+	align-items: center;
+}
+
+
+.navbar-link {
+	display: inline-block;
+	padding: 10px 15px;
+	font-size: 16px;
+	text-decoration: none;
+	color: #fff;
+	background-color: #4CAF50;
+	/* Dark Green */
+	border-radius: 10px;
+	transition: background-color 0.3s ease;
+}
+
+.navbar-link:hover {
+	background-color: #45A049;
+	/* Slightly Darker Green */
+}
+
+.navbar-button {
+	padding: 10px 15px;
+	font-size: 16px;
+	text-decoration: none;
+	color: #fff;
+	background-color: #4CAF50;
+	/* Dark Green */
+	border: none;
+	border-radius: 10px;
+	transition: background-color 0.3s ease;
+	cursor: pointer;
+}
+
+.navbar-button:hover {
+	background-color: #D32F2F;
+	/* Slightly Darker Red */
+}
+
+/* Centered header */
+.centered {
+	text-align: center;
+	margin: 0px auto;
+}
+
+/* Styling for dropdown */
+.dropDown {
+	background-color: #4CAF50;
+	/* Light green */
+	color: #fff;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+	margin-left: 10px;
+	font-size: 16px;
+}
+
+/* Footer styles */
+footer {
+	width: 100%;
+	text-align: center;
+	margin: 0;
+	padding: 10px;
+	color: black;
+}
+
+.footer-content {
+	font-size: 14px;
+}
+
+.error {
+	color: red
+}
+
+.login-label {
+	display: inline-block;
+	width: 150px;
+	/* Adjust the width as needed */
+	margin-right: 10px;
+	/* Adjust the spacing as needed */
+	text-align: start;
+}
+
+.login-input {
+	padding: 5px;
+	margin: 5px;
+}
+
+.paypal {
+	text-align: center;
+}
+
+.surprise-guest {
+  font-size: 1.25em; /* Adjust font size as needed */
+}
+
+.guest-name {
+  font-size: 1.5em; /* Adjust font size as needed */
+  font-weight: bold;
+}

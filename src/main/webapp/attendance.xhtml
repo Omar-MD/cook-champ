@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Student Check-In/Check-Out</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/styles.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+.StudentTable th, .StudentTable td {
+	padding: 8px;
+	border: 1px solid #ccc;
+	text-align: left;
+	min-width: 100px
+}
+</style>
+</h:head>
+<h:body styleClass="container">
+	<header>
+		<nav class="navbar">
+			<div class="navbar-start">
+				<h:outputLink value="home.xhtml"
+					styleClass="navbar-logo navbar-link">
+					<span style="font-size: 20px;">Cook<span
+						style="color: #395C39;">Champion</span></span>
+				</h:outputLink>
+			</div>
+			<div class="navbar-end">
+				<h:form>
+					<h:outputLink value="booking.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserCustomer()}">
+						Student Booking
+		            </h:outputLink>
+					<h:outputLink value="studentlist.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student List
+		            </h:outputLink>
+					<h:outputLink value="attendance.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student Attendance
+		            </h:outputLink>
+					<h:outputLink value="recipeupload.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Recipe Upload
+		            </h:outputLink>
+				</h:form>
+				<h:form rendered="#{not loginController.loggedIn}">
+					<h:outputLink value="register.xhtml" styleClass="navbar-link">
+						Registration
+	            	</h:outputLink>
+					<h:outputLink value="login.xhtml" styleClass="navbar-link">
+		                Login
+		            </h:outputLink>
+				</h:form>
+				<h:form>
+					<h:commandButton value="Logout" action="#{loginController.logout}"
+						styleClass="navbar-button" rendered="#{loginController.loggedIn}" />
+				</h:form>
+			</div>
+		</nav>
+	</header>
+	<main>
+		<h1 class="centered">Student Check-In/Check-Out</h1>
+		<h:form>
+			<h:panelGroup id="daySelection">
+				<h:outputLabel for="selectedDay" value="Select a Day: " />
+				<h:selectOneMenu id="selectedDay" styleClass="dropDown"
+					value="#{campController.selectedDay}">
+					<f:selectItems value="#{campController.daysOfWeek}" />
+					<f:ajax render="studentTabs" />
+				</h:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup id="studentTabs">
+				<ui:repeat value="#{campController.daysOfWeek}" var="day"
+					varStatus="dayIndex">
+					<ui:fragment rendered="#{campController.isDaySelected(day)}">
+						<h4 class="centered">#{day}</h4>
+						<ui:repeat value="#{campController.ageGroups}" var="ageGroup">
+							<h5>Age Group: #{ageGroup}</h5>
+							<h:dataTable
+								value="#{campController.getStudentsByAgeGroup(ageGroup)}"
+								var="student" styleClass="StudentTable"
+								headerClass="StudentTableHeader"
+								rowClasses="StudentTableOddRow, StudentTableEvenRow"
+								rendered="#{campController.isDaySelected(day)}">
+
+								<!-- Student ID -->
+								<h:column>
+									<f:facet name="header">ID</f:facet>
+									<h:outputText value="#{student.studentID}" />
+								</h:column>
+
+								<!-- Student Name -->
+								<h:column>
+									<f:facet name="header">Name</f:facet>
+									<h:outputText value="#{student.studentName}" />
+								</h:column>
+
+								<!-- Check-In Time -->
+								<h:column>
+									<f:facet name="header">Check-In</f:facet>
+									<h:outputText
+										value="#{student.attendanceRecords[dayIndex.index].checkIn}"
+										rendered="#{student.attendanceRecords[dayIndex.index].checkIn != null}">
+										<f:convertDateTime pattern="HH:mm:ss" timeZone="GMT" />
+									</h:outputText>
+									<h:commandButton value="Check-In"
+										action="#{student.checkIn(dayIndex.index)}"
+										rendered="#{student.attendanceRecords[dayIndex.index].checkIn == null}"
+										styleClass="navbar-button" style="font-size: 10px" />
+								</h:column>
+
+								<!-- Check-Out Time -->
+								<h:column>
+									<f:facet name="header">Check-Out</f:facet>
+									<h:outputText
+										value="#{student.attendanceRecords[dayIndex.index].checkOut}"
+										rendered="#{student.attendanceRecords[dayIndex.index].checkOut != null}">
+										<f:convertDateTime pattern="HH:mm:ss" timeZone="GMT" />
+									</h:outputText>
+									<h:commandButton value="Check-Out"
+										action="#{student.checkOut(dayIndex.index)}"
+										rendered="#{student.attendanceRecords[dayIndex.index].checkOut == null}"
+										styleClass="navbar-button" style="font-size: 10px" />
+								</h:column>
+							</h:dataTable>
+							<br />
+						</ui:repeat>
+					</ui:fragment>
+				</ui:repeat>
+			</h:panelGroup>
+		</h:form>
+	</main>
+	<footer>
+		<div class="footer-content">&#169; 2023 Cook Like A Champion.
+			All rights reserved.</div>
+	</footer>
+</h:body>
+</html>

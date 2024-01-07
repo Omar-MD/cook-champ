@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Register Page</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/styles.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</h:head>
+<h:body styleClass="container">
+	<header>
+		<nav class="navbar">
+			<div class="navbar-start">
+				<h:outputLink value="home.xhtml"
+					styleClass="navbar-logo navbar-link">
+					<span style="font-size: 20px;">Cook<span
+						style="color: #395C39;">Champion</span></span>
+				</h:outputLink>
+			</div>
+			<div class="navbar-end">
+				<h:form>
+					<h:outputLink value="booking.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserCustomer()}">
+						Student Booking
+		            </h:outputLink>
+					<h:outputLink value="studentlist.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student List
+		            </h:outputLink>
+					<h:outputLink value="attendance.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student Attendance
+		            </h:outputLink>
+				</h:form>
+				<h:form rendered="#{not loginController.loggedIn}">
+					<h:outputLink value="register.xhtml" styleClass="navbar-link">
+						Registration
+	            	</h:outputLink>
+					<h:outputLink value="login.xhtml" styleClass="navbar-link">
+		                Login
+		            </h:outputLink>
+				</h:form>
+				<h:form>
+					<h:commandButton value="Logout" action="#{loginController.logout}"
+						styleClass="navbar-button" rendered="#{loginController.loggedIn}" />
+				</h:form>
+			</div>
+		</nav>
+		<div class="header-image-container">
+			<img src="resources/images/kids-teacher.jpg" alt="Cooking Camp Image"
+				height="180px" class="camp-image" />
+		</div>
+	</header>
+	<main class="centered">
+		<h3>To Book a Course, you need to Register first</h3>
+		<h4>It's quick and easy - just enter your details below:</h4>
+		<br />
+		<h:form>
+			<p:outputLabel value="Name:" styleClass="login-label" />
+			<p:inputText value="#{registerBean.name}" styleClass="login-input" />
+			<br />
+			<p:outputLabel value="Email:" styleClass="login-label" />
+			<p:inputText value="#{registerBean.email}" styleClass="login-input" />
+			<br />
+			<p:outputLabel value="Password:" styleClass="login-label" />
+			<p:password value="#{registerBean.password}" styleClass="login-input" />
+			<br />
+			<p:outputLabel value="Confirm Password:" styleClass="login-label" />
+			<p:password value="#{registerBean.confirmPassword}"
+				styleClass="login-input" />
+			<br />
+			<h:commandButton value="Register" action="#{registerBean.doRegister}"
+				styleClass="button" ajax="false" />
+			<br />
+			<p:messages styleClass="messages" />
+		</h:form>
+		<br />
+	</main>
+	<footer>
+		<div class="footer-content">&#169; 2023 Cook Like A Champion.
+			All rights reserved.</div>
+	</footer>
+</h:body>
+</html>

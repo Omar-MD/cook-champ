@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Recipe Upload</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/styles.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+		.RecipeTable th, .RecipeTable td {
+			padding: 0px;
+			align-items: centre;
+			width: 80%;
+			margin: 0 auto;
+		}
+	</style>
+</h:head>
+<h:body styleClass="container">
+	<header>
+		<nav class="navbar">
+			<div class="navbar-start">
+				<h:outputLink value="home.xhtml"
+					styleClass="navbar-logo navbar-link">
+					<span style="font-size: 20px;">Cook<span
+						style="color: #395C39;">Champion</span></span>
+				</h:outputLink>
+			</div>
+			<div class="navbar-end">
+				<h:form>
+					<h:outputLink value="booking.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserCustomer()}">
+						Student Booking
+		            </h:outputLink>
+					<h:outputLink value="studentlist.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student List
+		            </h:outputLink>
+					<h:outputLink value="attendance.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student Attendance
+		            </h:outputLink>
+					<h:outputLink value="recipeupload.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Recipe Upload
+		            </h:outputLink>
+				</h:form>
+				<h:form rendered="#{not loginController.loggedIn}">
+					<h:outputLink value="register.xhtml" styleClass="navbar-link">
+						Registration
+	            	</h:outputLink>
+					<h:outputLink value="login.xhtml" styleClass="navbar-link">
+		                Login
+		            </h:outputLink>
+				</h:form>
+				<h:form>
+					<h:commandButton value="Logout" action="#{loginController.logout}"
+						styleClass="navbar-button" rendered="#{loginController.loggedIn}" />
+				</h:form>
+			</div>
+		</nav>
+	</header>
+	<main>
+
+		<section>
+			<h3>Upload a Recipe</h3>
+			<h:form style="align-items: start; align-text: start;">
+				<p:outputLabel value="Recipe Title:" styleClass="login-label" />
+				<p:inputText required="true" id="recipeTitle"
+					requiredMessage="Please enter a recipe title"
+					value="#{recipeController.recipeTitle}" styleClass="login-input" />
+				<p:outputLabel value="Age Group:" styleClass="login-label"
+					style="margin-left: 73px;" />
+				<h:selectOneMenu value="#{recipeController.ageGroup}"
+					styleClass="dropDown">
+					<f:selectItem itemValue="8-11" itemLabel="8-11" />
+					<f:selectItem itemValue="12-14" itemLabel="12-14" />
+					<f:selectItem itemValue="15-16" itemLabel="15-16" />
+				</h:selectOneMenu>
+				<br />
+				<p:outputLabel value="Recipe Text:" styleClass="login-label" />
+				<p:inputTextarea required="true" id="recipeText" rows="5" cols="63"
+					requiredMessage="Please enter the recipe"
+					value="#{recipeController.recipeText}" styleClass="login-input" />
+				<br />
+				<h:commandButton value="Add Recipe"
+					action="#{recipeController.addRecipe()}" styleClass="button"
+					ajax="false" />
+				<br />
+				<h:message for="recipeTitle" styleClass="error" />
+				<br />
+				<h:message for="recipeText" styleClass="error" />
+			</h:form>
+		</section>
+		<section class="centered">
+			<h1>All Recipes</h1>
+			<h:form>
+				<h:dataTable value="#{recipeController.recipeList}" var="recipe"
+					styleClass="RecipeTable" headerClass="RecipeTableHeader"
+					rowClasses="RecipeTableOddRow, RecipeTableEvenRow">
+
+					<h:column
+						style="font-family: Arial, Helvetica, sans-serif; color: green; font-size: 16px; 
+							text-align: left;font-weight: bold;border-collapse: collapse; ">
+
+						<pre
+							style="font-family: Arial, Helvetica, sans-serif; color: green; font-size: 18px; font-weight: bold; padding-right: 8px; padding-bottom: 3px; text-align: center;">
+	
+							<f:facet name="header">Recipe Title</f:facet>
+							<h:inputText value="#{recipe.recipeTitle}"
+								rendered="#{recipe.canEdit}" />
+							<h:outputText value="#{ recipe.recipeTitle }"
+								rendered="#{not recipe.canEdit}" 
+								/>
+			 	   		</pre>
+					</h:column>
+
+					<h:column>
+						<pre
+							style="font-family: Arial, Helvetica, sans-serif; color: green; font-size: 16px; padding-right: 5px; padding-bottom: 3px;">
+							<f:facet name="header">Recipe Text</f:facet>
+							<h:inputTextarea rows="18" cols="63" value="#{recipe.recipeText}"
+								rendered="#{recipe.canEdit}" />
+							<h:outputText value="#{recipe.recipeText}"
+								rendered="#{not recipe.canEdit}" />
+						</pre>
+					</h:column>
+
+					<h:column>
+						<pre
+							style="font-family: Arial, Helvetica, sans-serif; color: green; font-size: 18px; font-weight: bold; padding-right: 8px; padding-bottom: 3px; width: 36px">
+					
+							<f:facet name="header">Group</f:facet>
+							<h:inputText value="#{recipe.ageGroup}"
+								rendered="#{recipe.canEdit}" />
+							<h:outputText value="#{recipe.ageGroup}"
+								rendered="#{not recipe.canEdit}" />
+						</pre>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Edit</f:facet>
+						<h:commandLink value="Edit"
+							action="#{recipeController.editRecipe(recipe)}"
+							rendered="#{not recipe.canEdit}" styleClass="navbar-button"
+							style="font-size: 12px" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Delete</f:facet>
+						<h:commandLink value="Delete"
+							action="#{recipeController.deleteRecipe(recipe)}"
+							rendered="#{not recipe.canEdit}" styleClass="navbar-button"
+							style="font-size: 12px" />
+					</h:column>
+				</h:dataTable>
+				<h:commandButton value="Save Changes "
+					action="#{recipeController.saveAction()}" styleClass="button" />
+			</h:form>
+		</section>
+	</main>
+	<footer>
+		<div class="footer-content">&#169; 2023 Cook Like A Champion.
+			All rights reserved.</div>
+	</footer>
+</h:body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Student List</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/styles.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+.StudentTable th, .StudentTable td {
+	padding: 8px;
+	border: 1px solid #ccc;
+	text-align: left;
+	min-width: 100px;
+}
+</style>
+	<f:metadata>
+		<f:viewAction action="#{studentBookingBean.resetBookingMessage()}" />
+	</f:metadata>
+</h:head>
+<h:body styleClass="container">
+	<header>
+		<nav class="navbar">
+			<div class="navbar-start">
+				<h:outputLink value="home.xhtml"
+					styleClass="navbar-logo navbar-link">
+					<span style="font-size: 20px;">Cook<span
+						style="color: #395C39;">Champion</span></span>
+				</h:outputLink>
+			</div>
+			<div class="navbar-end">
+				<h:form>
+					<h:outputLink value="booking.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserCustomer()}">
+						Student Booking
+		            </h:outputLink>
+					<h:outputLink value="studentlist.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student List
+		            </h:outputLink>
+					<h:outputLink value="attendance.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student Attendance
+		            </h:outputLink>
+					<h:outputLink value="recipeupload.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Recipe Upload
+		            </h:outputLink>
+				</h:form>
+				<h:form rendered="#{not loginController.loggedIn}">
+					<h:outputLink value="register.xhtml" styleClass="navbar-link">
+						Registration
+	            	</h:outputLink>
+					<h:outputLink value="login.xhtml" styleClass="navbar-link">
+		                Login
+		            </h:outputLink>
+				</h:form>
+				<h:form>
+					<h:commandButton value="Logout" action="#{loginController.logout}"
+						styleClass="navbar-button" rendered="#{loginController.loggedIn}" />
+				</h:form>
+			</div>
+		</nav>
+	</header>
+	<main>
+		<h1 class="centered">Student List</h1>
+		<section class="centered">
+			<h:form>
+				<h:dataTable value="#{campController.getAllStudents()}"
+					var="student" styleClass="StudentTable"
+					headerClass="StudentTableHeader"
+					rowClasses="StudentTableOddRow, StudentTableEvenRow">
+
+					<h:column>
+						<f:facet name="header">ID</f:facet>
+						<h:inputText value="#{student.studentID}"
+							rendered="#{student.canEdit}" />
+						<h:outputText value="#{student.studentID}"
+							rendered="#{not student.canEdit}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Name</f:facet>
+						<h:inputText value="#{student.studentName}"
+							rendered="#{student.canEdit}" />
+						<h:outputText value="#{student.studentName}"
+							rendered="#{not student.canEdit}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Age Group</f:facet>
+						<h:inputText value="#{student.ageGroup}"
+							rendered="#{student.canEdit}" />
+						<h:outputText value="#{student.ageGroup}"
+							rendered="#{not student.canEdit}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Guardian Name</f:facet>
+						<h:inputText value="#{student.guardianName}"
+							rendered="#{student.canEdit}" />
+						<h:outputText value="#{student.guardianName}"
+							rendered="#{not student.canEdit}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Contact Number</f:facet>
+						<h:inputText value="#{student.contactNum}"
+							rendered="#{student.canEdit}" />
+						<h:outputText value="#{student.contactNum}"
+							rendered="#{not student.canEdit}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Edit</f:facet>
+						<h:commandLink value="Edit"
+							action="#{campController.editStudent(student)}"
+							rendered="#{not student.canEdit}" styleClass="navbar-button"
+							style="font-size: 10px" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Delete</f:facet>
+						<h:commandLink value="Delete"
+							action="#{campController.deleteStudent(student)}"
+							rendered="#{not student.canEdit}" styleClass="navbar-button"
+							style="font-size: 10px" />
+					</h:column>
+				</h:dataTable>
+				<h:commandButton value="Save Changes "
+					action="#{campController.saveAction()}" styleClass="button" />
+			</h:form>
+		</section>
+		<section>
+			<h3>Student Booking</h3>
+			<h:form style="display:flex;">
+				<div>
+					<p:outputLabel value="Student Name:" styleClass="login-label" />
+					<p:inputText required="true" id="studentName"
+						requiredMessage="Please enter a student name"
+						value="#{studentBookingBean.studentName}" styleClass="login-input" />
+					<br />
+					<p:outputLabel value="Guardian Name:" styleClass="login-label" />
+					<p:inputText required="true" id="guardianName"
+						requiredMessage="Please enter a guardian name"
+						value="#{studentBookingBean.guardianName}"
+						styleClass="login-input" />
+					<br />
+					<p:outputLabel value="Contact Number:" styleClass="login-label" />
+					<p:inputText required="true" id="number"
+						requiredMessage="Please enter a number"
+						value="#{studentBookingBean.contactNum}" styleClass="login-input" />
+					<br />
+					<p:outputLabel value="Age Group:" styleClass="login-label" />
+					<h:selectOneMenu value="#{studentBookingBean.ageGroup}"
+						styleClass="dropDown">
+						<f:selectItem itemValue="8-11" itemLabel="8-11" />
+						<f:selectItem itemValue="12-14" itemLabel="12-14" />
+						<f:selectItem itemValue="15-16" itemLabel="15-16" />
+					</h:selectOneMenu>
+					<br />
+					<h:commandButton value="Add Student"
+						action="#{studentBookingBean.bookStudent()}" styleClass="button"
+						ajax="false" />
+					<br />
+				</div>
+				<div class="centered">
+					<h:message for="studentName" styleClass="error" />
+					<br />
+					<h:message for="guardianName" styleClass="error" />
+					<br />
+					<h:message for="number" styleClass="error" />
+					<br />
+					<h:outputLabel value="#{studentBookingBean.bookingMessage}" />
+				</div>
+			</h:form>
+		</section>
+	</main>
+	<footer>
+		<div class="footer-content">&#169; 2023 Cook Like A Champion.
+			All rights reserved.</div>
+	</footer>
+</h:body>
+</html>

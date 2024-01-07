@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Cook Like A Champion</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/styles.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</h:head>
+<h:body styleClass="container">
+	<header>
+		<nav class="navbar">
+			<div class="navbar-start">
+				<h:outputLink value="home.xhtml"
+					styleClass="navbar-logo navbar-link">
+					<span style="font-size: 20px;">Cook<span
+						style="color: #395C39;">Champion</span></span>
+				</h:outputLink>
+			</div>
+			<div class="navbar-end">
+				<h:form>
+					<h:outputLink value="booking.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserCustomer()}">
+						Student Booking
+		            </h:outputLink>
+					<h:outputLink value="studentlist.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student List
+		            </h:outputLink>
+					<h:outputLink value="attendance.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Student Attendance
+		            </h:outputLink>
+					<h:outputLink value="recipeupload.xhtml" styleClass="navbar-link"
+						rendered="#{loginController.isUserAdmin()}">
+		                Recipe Upload
+		            </h:outputLink>
+				</h:form>
+				<h:form rendered="#{not loginController.loggedIn}">
+					<h:outputLink value="register.xhtml" styleClass="navbar-link">
+						Registration
+	            	</h:outputLink>
+					<h:outputLink value="login.xhtml" styleClass="navbar-link">
+		                Login
+		            </h:outputLink>
+				</h:form>
+				<h:form>
+					<h:commandButton value="Logout" action="#{loginController.logout}"
+						styleClass="navbar-button" rendered="#{loginController.loggedIn}" />
+				</h:form>
+			</div>
+		</nav>
+		<div class="header-image-container">
+			<img src="resources/images/cooking-camp.jpg" alt="Cooking Camp Image"
+				class="camp-image" height="180px" />
+		</div>
+	</header>
+	<main>
+		<section class="CampText">
+			<div>
+				<h1>Welcome To Camp Scrumptious!</h1>
+				<h4>Where Kids Learn to Cook Like Champions!</h4>
+				<p>Our Mission is to encourage kids to adopt a healthy diet by
+					teaching them to cook nutritional and affordable recipes. We’ve
+					partnered with Athlone Rugby and GAA Club to offer a series of
+					Cooking Summer Camps where some well known Sports Stars will be
+					dropping in to share their favourite recipes.</p>
+				<p>Our camps are specifically designed to inspire, engage and
+					educate young chefs into the world of healthy cooking and
+					nutrition. All while having a great time in the kitchen, in a safe
+					and warm environment.</p>
+				<h5 style="font-size: 16px">Thanks to government funding, we are able to offer each camp </h5>
+				<h5 style="font-size: 16px">for the very affordable price of just &#8364;45 per child! </h5>
+				<br />
+				<p>This summer we’re offering classes for the following age
+					groups:</p>
+				<article>
+					<h5>Little League Champion Chefs -  Aug 21-26 </h5>
+					<ul>
+						<li><p>For 8-11 year-olds, ratio of 3 students to 1 adult and
+								a maximum class size of 9 students</p></li>
+						<li><p>Kids learn a variety of recipes including some
+								healthy snacks like Rainbow Fruit Skewers</p></li>
+					</ul>
+					<div class="button-container">
+						<a href="camp8_11.xhtml" class="button">Little League Camp!</a>
+					</div>
+				</article>
+				<article>
+					<h5>First Division Champion Chefs - Aug 28-Sep 2</h5>
+					<ul>
+						<li><p>For 12-14 year-olds, ratio of 6 students to 1 adult and
+								a maximum class size of 12 students</p></li>
+						<li><p>Kids will learn several healthy and nutritious
+								recipes including Chickpea Veggie Burgers</p></li>
+					</ul>
+					<div class="button-container">
+						<a href="camp12_14.xhtml" class="button">First Division Camp!</a>
+					</div>
+				</article>
+				<article>
+					<h5>Premier League Champion Chefs - Sep 4-9</h5>
+					<ul>
+						<li><p>For 15-16 year-olds, ratio of 8 students to 1 adult and
+								a maximum class size of 24 students</p></li>
+						<li><p>These more mature chefs will learn how to make
+								dishes such as vegetarian Shepherds’ Pie</p></li>
+					</ul>
+					<div class="button-container">
+						<a href="camp15_16.xhtml" class="button">Premier League Camp!</a>
+					</div>
+				</article>
+				<br />
+				<p>This is where young foodies are discovered! We show children
+					the fun and the wonder of cooking. They learn traditional cooking
+					skills and have fun with good, honest, delicious food. Places are
+					limited so don’t miss out! Book your kid’s camp now!</p>
+			</div>
+		</section>
+	</main>
+	<footer>
+		<div class="footer-image-container">
+			<img src="resources/images/3kids-banner.jpg" alt="Cooking Camp Image"
+				class="camp-image" height="180px" />
+		</div>
+		<div class="footer-content">&#169; 2023 Cook Like A Champion.
+			All rights reserved.</div>
+	</footer>
+</h:body>
+</html>
